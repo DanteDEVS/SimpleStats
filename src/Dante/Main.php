@@ -301,7 +301,7 @@ class Main extends PluginBase implements Listener {
         $this->db->query("INSERT INTO `player_stats`
 			(`name`, `breaks`, `places`, `deaths`, `kicked`, `drops`, `joins`, `quits`, `kills`,`wins`,`chats`)
 			VALUES
-			('".$this->db->escape_string(strtolower($player->getPlayer()->getDisplayName()))."', '0','0','0','0','0','0','0','0','0')
+			('".$this->db->escape_string(strtolower($player->getDisplayName()))."', '0','0','0','0','0','0','0','0','0')
 		    ");
             }
     }
