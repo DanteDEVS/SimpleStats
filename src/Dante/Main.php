@@ -60,7 +60,7 @@ class Main extends PluginBase implements Listener {
         $this->getLogger()->info(TextFormat::RED."- PlayerStats disabled !");
     }
 
-    public function onCommand(CommandSender $sender, string $commandLabel, array $args) : void{
+    public function onCommand(CommandSender $sender, Command $command, string $label, array $args) : bool{
         if($sender instanceof Player){
             if($command == "stats"){
                 if(isset($args[0])){
