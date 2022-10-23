@@ -44,8 +44,8 @@ class Main extends PluginBase implements Listener {
         $this->db = new \mysqli($config["host"], $config["user"], $config["password"], $config["database"], isset($config["port"]) ? $config["port"] : 3306);
         if($this->db->connect_error){
             $this->getLogger()->critical("Couldn't connect to MySQL: ". $this->db->connect_error);
-            $this->getLogger()->critical("Disabled PlayerStats plugin !");
-            $this->getServer()->getPluginManager()->disablePlugin($this->getServer()->getPluginManager()->getPlugin("PlayerStats"));
+            $this->getLogger()->critical("Disabled SimpleStats plugin !");
+            $this->getServer()->getPluginManager()->disablePlugin($this->getServer()->getPluginManager()->getPlugin("SimpleStats"));
             return;
         }
         $this->getLogger()->info("Creating query to database...");
@@ -60,7 +60,7 @@ class Main extends PluginBase implements Listener {
         $this->getLogger()->info(TextFormat::RED."- PlayerStats disabled !");
     }
 
-    public function onCommand(CommandSender $sender,Command $command,$label,array $args): bool{
+    public function onCommand(CommandSender $sender, string $commandLabel, array $args) : void{
         if($sender instanceof Player){
             if($command == "stats"){
                 if(isset($args[0])){
