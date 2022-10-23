@@ -27,7 +27,7 @@ class Main extends PluginBase implements Listener {
     /** @var \mysqli */
     protected $db;
 
-    public function onEnable(){
+    protected function onEnable(): void{
         @mkdir($this->getDataFolder());
         $this->saveDefaultConfig();
         $this->reloadConfig();
@@ -56,7 +56,7 @@ class Main extends PluginBase implements Listener {
         $this->getLogger()->info("Successfully connected to MySQL server!");
     }
 
-    public function onDisable(){
+    protected function onDisable(): void{
         $this->getLogger()->info(TextFormat::RED."- PlayerStats disabled !");
     }
 
