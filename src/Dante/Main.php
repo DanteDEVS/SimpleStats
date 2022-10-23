@@ -1,6 +1,6 @@
 <?php
 
-namespace PlayerStats;
+namespace Dante;
 
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
