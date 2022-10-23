@@ -60,12 +60,12 @@ class Main extends PluginBase implements Listener {
         $this->getLogger()->info(TextFormat::RED."- PlayerStats disabled !");
     }
 
-    public function onCommand(CommandSender $sender,Command $command,$label,array $args){
+    public function onCommand(CommandSender $sender,Command $command,$label,array $args): bool{
         if($sender instanceof Player){
             if($command == "stats"){
                 if(isset($args[0])){
                     if($args[0] instanceof Player){ // ???
-                        $stats = $this->getAll($this->getServer()->getPlayer($args[0]));
+                        $stats = $this->getAll($this->getServer()->getPlayerByPrefix($args[0]));
                         if(!(is_null($stats))) {
                             $kills = $stats["kills"]; $deaths = $stats["deaths"]; $chats = $stats["chats"]; 
                             $breaks = $stats["breaks"]; $places = $stats["places"]; 
@@ -425,7 +425,7 @@ class Main extends PluginBase implements Listener {
         if(is_null($this->getPlayer($e->getPlayer()))){
             $this->AddPlayer($e->getPlayer());
         } else {
-            $this->db->query("UPDATE `player_stats` SET `quits` = quits +1 WHERE `name = '" . $this->db->escape_string($e->getPlayer()->getName()) . "'") or die($this->db->mysqli_error());
+            $this->db->query("UPDATE `player_stats` SET `quits` = quits +1 WHERE `name = '" . $this->db->escape_string($e->getPlayer()->getName()) . "'") or die($this->db->mysqli_connect_error());
         }
         //$this->db->query("UPDATE player_stats SET quits = quits +1 WHERE name = '".$this->db->escape_string($e->getPlayer()->getName())."'") or die($this->bd->mysqli_error());
     }
