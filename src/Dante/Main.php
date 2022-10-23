@@ -360,7 +360,7 @@ class Main extends PluginBase implements Listener {
     public function DeathEvent(PlayerDeathEvent $event){
         $victim = $event->getEntity();
         if($victim instanceof Player){
-            $this->db->query("UPDATE `player_stats` SET `deaths` = deaths +1 WHERE `name` = '".strtolower($this->db->escape_string($event->getEntity()->getPlayer()->getDisplayName()))."'");
+            $this->db->query("UPDATE `player_stats` SET `deaths` = deaths +1 WHERE `name` = '".strtolower($this->db->escape_string($event->getEntity()->getDisplayName()))."'");
             $cause = $event->getEntity()->getLastDamageCause()->getCause();
             if($cause == 1){
                 $killer = $event->getEntity()->getLastDamageCause()->getEntity();
