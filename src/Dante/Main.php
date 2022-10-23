@@ -417,16 +417,4 @@ class Main extends PluginBase implements Listener {
             $this->db->query("UPDATE `player_stats` SET `joins` = joins +1 WHERE `name` = '" . $this->db->escape_string($e->getPlayer()->getDisplayName()) . "'");
         }
     }
-
-    /**
-     * @param PlayerQuitEvent $e
-     */
-    public function onPlayerQuit(PlayerQuitEvent $e){
-        if(is_null($this->getPlayer($e->getPlayer()))){
-            $this->AddPlayer($e->getPlayer());
-        } else {
-            $this->db->query("UPDATE `player_stats` SET `quits` = quits +1 WHERE `name = '" . $this->db->escape_string($e->getPlayer()->getName()) . "'") or die($this->db->mysqli_connect_error());
-        }
-        //$this->db->query("UPDATE player_stats SET quits = quits +1 WHERE name = '".$this->db->escape_string($e->getPlayer()->getName())."'") or die($this->bd->mysqli_error());
-    }
 }
