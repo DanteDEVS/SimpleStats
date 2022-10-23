@@ -297,7 +297,7 @@ class Main extends PluginBase implements Listener {
      * @param Player $player
      */
     public function AddPlayer(Player $player){
-	if($this->getPlayer($player->getPlayer()) == null){
+	if($this->getPlayer($player) == null){
         $this->db->query("INSERT INTO `player_stats`
 			(`name`, `breaks`, `places`, `deaths`, `kicked`, `drops`, `joins`, `quits`, `kills`,`wins`,`chats`)
 			VALUES
