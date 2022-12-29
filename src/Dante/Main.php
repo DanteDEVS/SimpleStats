@@ -108,6 +108,7 @@ class Main extends PluginBase implements Listener {
         }else{
             $sender->sendMessage(TextFormat::RED."- Console didn't support this command !");
         }
+	return true;
     }
 
     /* ---------------- API PART -------------------*/
@@ -124,7 +125,7 @@ class Main extends PluginBase implements Listener {
             $result->free();
             if(isset($data["name"]) and strtolower($data["name"]) === $name){
                 unset($data["name"]);
-                return $data["deaths"];
+                return (int) $data["deaths"];
             }
         }
         return null;
@@ -142,7 +143,7 @@ class Main extends PluginBase implements Listener {
             $result->free();
             if(isset($data["name"]) and strtolower($data["name"]) === $name){
                 unset($data["name"]);
-                return $data["joins"];
+                return (int) $data["joins"];
             }
         }
         return null;
@@ -160,7 +161,7 @@ class Main extends PluginBase implements Listener {
             $result->free();
             if(isset($data["name"]) and strtolower($data["name"]) === $name){
                 unset($data["name"]);
-                return $data["drops"];
+                return (int) $data["drops"];
             }
         }
         return null;
@@ -178,7 +179,7 @@ class Main extends PluginBase implements Listener {
             $result->free();
             if(isset($data["name"]) and strtolower($data["name"]) === $name){
                 unset($data["name"]);
-                return $data["kills"];
+                return (int) $data["kills"];
             }
         }
         return null;
@@ -196,7 +197,7 @@ class Main extends PluginBase implements Listener {
             $result->free();
             if(isset($data["name"]) and strtolower($data["name"]) === $name){
                 unset($data["name"]);
-                return $data["wins"];
+                return (int) $data["wins"];
             }
         }
         return null;
@@ -214,7 +215,7 @@ class Main extends PluginBase implements Listener {
             $result->free();
             if(isset($data["name"]) and strtolower($data["name"]) === $name){
                 unset($data["name"]);
-                return $data["quits"];
+                return (int) $data["quits"];
             }
         }
         return null;
@@ -232,7 +233,7 @@ class Main extends PluginBase implements Listener {
             $result->free();
             if(isset($data["name"]) and strtolower($data["name"]) === $name){
                 unset($data["name"]);
-                return $data["breaks"];
+                return (int) $data["breaks"];
             }
         }
         return null;
@@ -250,7 +251,7 @@ class Main extends PluginBase implements Listener {
             $result->free();
             if(isset($data["name"]) and strtolower($data["name"]) === $name){
                 unset($data["name"]);
-                return $data["places"];
+                return (int) $data["places"];
             }
         }
         return null;
@@ -268,7 +269,7 @@ class Main extends PluginBase implements Listener {
             $result->free();
             if(isset($data["name"]) and strtolower($data["name"]) === $name){
                 unset($data["name"]);
-                return $data["chats"];
+                return (int) $data["chats"];
             }
         }
         return null;
@@ -350,24 +351,6 @@ class Main extends PluginBase implements Listener {
                 $this->AddPlayer($e->getPlayer());
             }else{
                 $this->db->query("UPDATE `player_stats` SET `chats` = chats +1 WHERE `name` = '".strtolower($this->db->escape_string($e->getPlayer()->getDisplayName()))."'");
-            }
-        }
-    }
-
-    /**
-     * @param PlayerDeathEvent $event
-     */
-    public function DeathEvent(PlayerDeathEvent $event){
-        $victim = $event->getEntity();
-        if($victim instanceof Player){
-            $this->db->query("UPDATE `player_stats` SET `deaths` = deaths +1 WHERE `name` = '".strtolower($this->db->escape_string($event->getEntity()->getDisplayName()))."'");
-            $cause = $event->getEntity()->getLastDamageCause()->getCause();
-            if($cause == 1){
-                $killer = $event->getEntity()->getLastDamageCause()->getEntity();
-                if($killer instanceof EntityDamageByEntityEvent){
-                    $this->db->query("UPDATE `player_stats` SET `kills` = kills +1 WHERE `name` = '".strtolower($this->db->escape_string($killer))."'");
-                }
-
             }
         }
     }
